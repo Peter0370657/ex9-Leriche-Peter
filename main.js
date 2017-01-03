@@ -15,7 +15,28 @@ var dalWeather = require("./WeatherStorage.js");
 
 
 var app = express();
+app.use(parser.json());
 
+app.get("/weather", function(request, response){
+    dalWeather.listAllWeather(function(err, weather){
+        if (err){
+            throw err;
+        }
+        response.send(weather);
+    });
+});
+app.post("/weather", function(request, response){
+    var Weather = new Weather(request.body.Weatherid, request.body.Weatherdesc, request.body.Temp, request.body.unixtime, request.body.Location);
+    
+    dalWeather.CreateWeather(Weather, function(err, weather){
+        if (err){
+            console.log(err);
+        }
+        response.send(weather);
+        
+        console.log("Weather: \n"+JSON.stringify(weather)+" added");
+    });  
+});//sluit lijn 28
 
 
 
