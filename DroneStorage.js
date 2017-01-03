@@ -24,6 +24,16 @@ var DroneSchema = mongoose.Schema({
 var Drone = mongoose.model('Drones', DroneSchema);
 
 module.exports = {
-    
-    
+    listAllDrones: function (callback){
+         Drone.find(callback);
+    },
+    findDrone: function(id, callback){
+        Drone.find({id: id}, callback);
+    },
+    createDrone: function(drone, callback){
+        Drone.create(drone, callback);
+    },
+    updateDrone: function(id, newdrone, callback ){
+        Drone.findOneAndUpdate({id: id}, newdrone, callback);
+    }
 };
