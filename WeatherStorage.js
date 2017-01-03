@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 var WeatherSchema = mongoose.Schema({
     Weatherid: {
         type: Number,
-        required: true,
+        required: true 
     },
     Weatherdesc: {
         type: String,
