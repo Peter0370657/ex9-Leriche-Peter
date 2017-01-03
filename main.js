@@ -70,7 +70,7 @@ app.post("/drone", function (request, response) {
     var Drone = new Dronep(request.body.Location, request.body.id, request.body.date, request.body.mac);
 
     dalDrone.createDrone(Drone, function (err, drone) {
-        var errors = validate.fieldsNotEmpty(Location,
+        var errors = validate.fieldsNotEmpty("Location",
             "id",
             "date",
             "mac"
