@@ -44,7 +44,7 @@ app.post("/weather", function (request, response) {
         }
         response.send(weather);
 
-        console.log("Weather: \n" + JSON.stringify(weather) + " added");
+        console.log("Weather added");
     });
 });
 
@@ -75,7 +75,7 @@ app.post("/drone", function (request, response) {
         }
         response.send(drone);
 
-        console.log("Drone: \n" + JSON.stringify(drone) + " added");
+        console.log("Drone added");
     });
 }); 
 
@@ -107,7 +107,7 @@ app.post("/location", function (request, response) {
         }
         response.send(location);
 
-        console.log("Location: \n" + JSON.stringify(location) + " added");
+        console.log("Location added");
     });
 }); 
 

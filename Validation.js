@@ -1,4 +1,6 @@
-module.exports{
+
+
+module.exports = {
     fieldsNotEmpty: function (object) {
         var errors = [];
         for (i = 1; i < arguments.length; i++) {
