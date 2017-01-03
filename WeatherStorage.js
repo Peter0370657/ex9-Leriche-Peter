@@ -38,7 +38,7 @@ module.exports = {
     createWeather: function (weather, callback) {
         Weather.create(weather, callback);
     },
-    updateSale: function (id, newwe, callback) {
+    updateWeather: function (id, newwe, callback) {
         Weather.findOneAndUpdate({weatherid: id}, newwe, callback);
     }
 };
