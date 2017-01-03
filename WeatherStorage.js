@@ -33,7 +33,7 @@ module.exports = {
         Weather.find(callback);
     },
     findWeather: function (weatherid, callback) {
-        Weather.find({saleid: weatherid}, callback);
+        Weather.find({weatherid: weatherid}, callback);
     },
     createWeather: function (weather, callback) {
         Weather.create(weather, callback);
