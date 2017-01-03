@@ -42,9 +42,9 @@ app.post("/weather", function(request, response){
         }
         response.send(weather);
         
-        console.log("Weather: \n"+JSON.stringify(weather)+" added");
+        console.log("Weather: \n"+JSON.stringify(weather)+" added"); 
     });  
-});//sluit lijn 28
+});  
 
 
 
