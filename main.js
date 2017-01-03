@@ -1,8 +1,11 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//opdracht 9
+
+var express = require('express');
+var parser = require('body-parser');
+
+var mongoose = require('mongoose');
+mongoose.connect("mongodb://localhost/opdracht9");
+
 
 
 console.log("hello world");
