@@ -70,8 +70,14 @@ app.post("/drone", function (request, response) {
     var Drone = new Dronep(request.body.Location, request.body.id, request.body.date, request.body.mac);
 
     dalDrone.createDrone(Drone, function (err, drone) {
-        if (err) {
-            console.log(err);
+        var errors = validate.fieldsNotEmpty(Location,
+            "id",
+            "date",
+            "mac"
+            );
+        if (errors) {
+            response.status(400).send({msg: "Volgende velden zijn verplicht:" + errors.concat()});
+            return;
         }
         response.send(drone);
 
