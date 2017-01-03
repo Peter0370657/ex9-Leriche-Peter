@@ -4,7 +4,7 @@ var parser = require('body-parser');
 var mongoose = require('mongoose'); //op aanraden van Jonas / Wibren
 mongoose.connect("mongodb://localhost/opdracht9");
 
-var dalDrone= require("./DroneStorage.js");
+var dalDrone = require("./DroneStorage.js");
 var dalLocation = require("./LocationStorage.js");
 var dalWeather = require("./WeatherStorage.js");
 
@@ -15,38 +15,71 @@ var dalWeather = require("./WeatherStorage.js");
 
 
 var app = express();
-app.use(parser.json()); 
+app.use(parser.json());
 
-app.get("/weather", function(request, response){
-    dalWeather.listAllWeather(function(err, weather){
-        if (err){
+//WEATHER
+
+app.get("/weather", function (request, response) {
+    dalWeather.listAllWeather(function (err, weather) {
+        if (err) {
             throw err;
         }
         response.send(weather);
     });
 });
 
-var Weatherp = function(Weatherid, Weatherdesc, Temp, unixtime, Location){
-  this.Weatherid = Weatherid;
-  this.Weatherdesc= Weatherdesc;
-  this.Temp = Temp;
-  this.unixtime = unixtime;
-  this.Location = Location;
+var Weatherp = function (Weatherid, Weatherdesc, Temp, unixtime, Location) {
+    this.Weatherid = Weatherid;
+    this.Weatherdesc = Weatherdesc;
+    this.Temp = Temp;
+    this.unixtime = unixtime;
+    this.Location = Location;
 };
-app.post("/weather", function(request, response){
+app.post("/weather", function (request, response) {
     var Weather = new Weatherp(request.body.Weatherid, request.body.Weatherdesc, request.body.Temp, request.body.unixtime, request.body.Location);
-    
-    dalWeather.createWeather(Weather, function(err, weather){
-        if (err){
+
+    dalWeather.createWeather(Weather, function (err, weather) {
+        if (err) {
             console.log(err);
         }
         response.send(weather);
-        
-        console.log("Weather: \n"+JSON.stringify(weather)+" added"); 
-    });  
-});  
 
+        console.log("Weather: \n" + JSON.stringify(weather) + " added");
+    });
+});
 
+//DRONE
+
+app.get("/drone", function (request, response) {
+    dalWeather.listAllDrones(function (err, Drone) {
+        if (err) {
+            throw err;
+        }
+        response.send(Drone);
+    });
+});
+
+var Dronep = function (Location, id, date, mac) {
+    this.Location = Location;
+    this.id = id;
+    this.date = date;
+    this.mac = mac;
+};
+
+app.post("/drone", function (request, response) {
+    var Drone = new Dronep(request.body.Location, request.body.id, request.body.date, request.body.mac);
+
+    dalDrone.createDrone(Drone, function (err, drone) {
+        if (err) {
+            console.log(err);
+        }
+        response.send(drone);
+
+        console.log("Drone: \n" + JSON.stringify(drone) + " added");
+    });
+});
+
+//LOCATION
 
 
 
