@@ -17,6 +17,10 @@ var LocationSchema = mongoose.Schema({
     capaciteit: {
         type: Number,
         required: true
+    },
+    Lokaal: {
+        type: String,
+        required: true
     }
 });
 
