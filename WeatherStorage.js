@@ -25,7 +25,7 @@ var WeatherSchema = mongoose.Schema({
     }
 });
 
-var Weather = mongoose.model('weather', SaleSchema);
+var Weather = mongoose.model('weather', WeatherSchema);
 
 module.exports = {
 
