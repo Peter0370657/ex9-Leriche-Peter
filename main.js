@@ -51,7 +51,7 @@ app.post("/weather", function (request, response) {
 //DRONE
 
 app.get("/drone", function (request, response) {
-    dalWeather.listAllDrones(function (err, Drone) {
+    dalDrone.listAllDrones(function (err, Drone) {
         if (err) {
             throw err;
         }
@@ -77,11 +77,38 @@ app.post("/drone", function (request, response) {
 
         console.log("Drone: \n" + JSON.stringify(drone) + " added");
     });
-});
+}); 
 
 //LOCATION
 
+app.get("/location", function (request, response) {
+    dalLocation.listAllLocations(function (err, Locatie) {
+        if (err) {
+            throw err;
+        }
+        response.send(Locatie);
+    });
+});
 
+var Locationp = function (locatieid, naam, stad, capaciteit, Lokaal) {
+    this.locatieid = locatieid;
+    this.naam = naam;
+    this.stad = stad;
+    this.capaciteit = capaciteit;
+    this.Lokaal = Lokaal;
+};
+
+app.post("/location", function (request, response) {
+    var Location = new Locationp(request.body.locatieid, request.body.naam, request.body.stad, request.body.capaciteit, request.body.Lokaal);
+
+    dalLocation.createLocation(Location, function (err, location) {
+        if (err) {
+            console.log(err);
+        }
+        response.send(location);
+
+        console.log("Location: \n" + JSON.stringify(location) + " added");
+    });
+}); 
 
 app.listen(8765);
-console.log("hello world");
