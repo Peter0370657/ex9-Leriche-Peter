@@ -15,7 +15,7 @@ var dalWeather = require("./WeatherStorage.js");
 
 
 var app = express();
-app.use(parser.json());
+app.use(parser.json()); 
 
 app.get("/weather", function(request, response){
     dalWeather.listAllWeather(function(err, weather){
