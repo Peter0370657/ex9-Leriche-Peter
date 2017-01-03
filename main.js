@@ -25,10 +25,18 @@ app.get("/weather", function(request, response){
         response.send(weather);
     });
 });
+
+var Weatherp = function(Weatherid, Weatherdesc, Temp, unixtime, Location){
+  this.Weatherid = Weatherid;
+  this.Weatherdesc= Weatherdesc;
+  this.Temp = Temp;
+  this.unixtime = unixtime;
+  this.Location = Location;
+};
 app.post("/weather", function(request, response){
-    var Weather = new Weather(request.body.Weatherid, request.body.Weatherdesc, request.body.Temp, request.body.unixtime, request.body.Location);
+    var Weather = new Weatherp(request.body.Weatherid, request.body.Weatherdesc, request.body.Temp, request.body.unixtime, request.body.Location);
     
-    dalWeather.CreateWeather(Weather, function(err, weather){
+    dalWeather.createWeather(Weather, function(err, weather){
         if (err){
             console.log(err);
         }
