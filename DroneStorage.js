@@ -2,20 +2,20 @@ var mongoose = require("mongoose");
 
 var DroneSchema = mongoose.Schema({
     Location: {
-        type: string,
+        type: String,
         required: true
     },
     id: {
-        type: string,
+        type: String,
         required: true,
         unique: true
     },
     date: {
-        type: datetime,
+        type: String,    //werkt blijkbaar niet, aanpassen naar string
         required: true
     },
     mac: {
-        type: string,
+        type: String,
         required: true
     }
 });

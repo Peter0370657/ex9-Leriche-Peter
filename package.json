@@ -1,8 +1,18 @@
 {
-    "name": "ex9-Leriche-Peter",
-    "version": "1.0.0",
-    "keywords": ["util", "functional", "server", "client", "browser"],
-    "author": "Peter",
-    "contributors": [],
-    "dependencies": {}
+  "name": "ex9-Leriche-Peter",
+  "version": "1.0.0",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": "Peter",
+  "contributors": [],
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongoose": "^4.7.6"
+  }
 }
