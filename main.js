@@ -12,7 +12,7 @@ var dalWeather = require("./WeatherStorage.js");
 // var ValDrone = require ("");
 // var ValLocation = require ("");
 // var ValWeather = require ("");   Niet zeker of deze nodig is aangezien die in principe van een externe api zou komen (openweathermap)
-
+var validate = require('./Validation.js');
 
 var app = express();
 app.use(parser.json());
