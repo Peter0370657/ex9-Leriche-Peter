@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 
 var LocationSchema = mongoose.Schema({
     locatieid: {
-        type: Number,
+        type: String,
         required: true,
         unique: true
     },

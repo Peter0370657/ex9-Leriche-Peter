@@ -11,7 +11,7 @@ var DroneSchema = mongoose.Schema({
         unique: true
     },
     date: {
-        type: String,    //werkt blijkbaar niet, aanpassen naar string
+        type: String,    //Datetime werkt blijkbaar niet, aanpassen naar string
         required: true
     },
     mac: {

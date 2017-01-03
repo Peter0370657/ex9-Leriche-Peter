@@ -82,11 +82,11 @@ app.post("/drone", function (request, response) {
 //LOCATION
 
 app.get("/location", function (request, response) {
-    dalLocation.listAllLocations(function (err, Locatie) {
+    dalLocation.listAllLocations(function (err, locatie) {
         if (err) {
             throw err;
         }
-        response.send(Locatie);
+        response.send(locatie);
     });
 });
 
