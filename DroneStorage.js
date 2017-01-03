@@ -13,7 +13,11 @@ var DroneSchema = mongoose.Schema({
     date: {
         type: datetime,
         required: true
-    }   
+    },
+    mac: {
+        type: string,
+        required: true
+    }
 });
 
 
