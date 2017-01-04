@@ -154,7 +154,7 @@ app.post("/location", function (request, response) {
 
 app.put("/location/:locatieid", function (request, response) {
     var Locatie = new Locationp(request.body.locatieid, request.body.naam, request.body.stad, request.body.capaciteit, request.body.Lokaal);
-    /*var errors = validate.fieldsNotEmpty(
+    var errors = validate.fieldsNotEmpty(
         "locatieid",
         "naam",
         "stad",
@@ -164,7 +164,7 @@ app.put("/location/:locatieid", function (request, response) {
         if (errors) {
             response.status(400).send({msg: "Volgende velden ontbreken of zijn verkeerd ingevuld:" + errors.concat()});
             return;
-        }*/
+        }
     dalLocation.updateLocation(request.params.locatieid, Locatie, function (err, locatie) {
         if (err) {
             console.log(err);
