@@ -1,12 +1,13 @@
-var express = require('express');
-var parser = require('body-parser');
+var express = require('express');                   //eenvoudige webserver in nodejs
+var parser = require('body-parser');                //eenvoudig body uitlezen
 
-var mongoose = require('mongoose'); //op aanraden van Jonas / Wibren
-mongoose.connect("mongodb://localhost/opdracht9");
+var mongoose = require('mongoose');                 //op aanraden van Jonas / Wibren
+mongoose.connect("mongodb://localhost/opdracht9");  //connecten met mongodb via mongoose
 
-var dalDrone = require("./DroneStorage.js");
-var dalLocation = require("./LocationStorage.js");
-var dalWeather = require("./WeatherStorage.js");
+//oproepen van datastores die beschreven staan in de ___Storage.js files
+var dalDrone = require("./DroneStorage.js");        
+var dalLocation = require("./LocationStorage.js");  
+var dalWeather = require("./WeatherStorage.js");    
 
 //moet ook nog 3 voor validation bij komen, een voor drones, een voor locations en een voor weather
 // var ValDrone = require ("");
@@ -215,14 +216,18 @@ app.post("/location", function (request, response) {
 
 
 app.put("/location/:locatieid", function (request, response) {
-    var Locatie = new Locationp(request.body.locatieid, request.body.naam, request.body.stad, request.body.capaciteit, request.body.Lokaal);
+    var Locatie = new Locationp(
+        request.body.locatieid,
+        request.body.naam,
+        request.body.stad,
+        request.body.capaciteit,
+        request.body.Lokaal);
     var errors = validate.fieldsNotEmpty(Locatie,
-            "locatieid",
-            "naam",
-            "stad",
-            "capaciteit",
-            "Lokaal"
-            );
+        "locatieid",
+        "naam",
+        "stad",
+        "capaciteit",
+        "Lokaal");
     if (errors) {
         response.status(400).send({msg: "Volgende velden ontbreken of zijn verkeerd ingevuld:" + errors.concat()});
         return;

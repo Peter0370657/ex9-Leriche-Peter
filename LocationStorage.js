@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");           //Mongoose op aanraden van Wibren/jonas omdat het makkelijker is om mee te werken
 
-var LocationSchema = mongoose.Schema({
+var LocationSchema = mongoose.Schema({  //aanmaken van schema voor mongoose / mongodb
     locatieid: {
         type: String,
         required: true,

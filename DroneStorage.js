@@ -2,7 +2,7 @@
 
 var mongoose = require("mongoose");       //Mongoose op aanraden van Wibren/jonas omdat het makkelijker is om mee te werken
 
-var DroneSchema = mongoose.Schema({
+var DroneSchema = mongoose.Schema({  
     Droneid: {
         type: String,
         required: true
