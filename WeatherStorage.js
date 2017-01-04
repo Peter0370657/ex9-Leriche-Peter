@@ -1,6 +1,4 @@
-/* global Weatherid */
-
-var mongoose = require("mongoose");
+var mongoose = require("mongoose");                     //Mongoose op aanraden van Wibren/jonas omdat het makkelijker is om mee te werken
 
 var WeatherSchema = mongoose.Schema({
     Weatherid: {
@@ -10,13 +8,11 @@ var WeatherSchema = mongoose.Schema({
     Weatherdesc: {
         type: String,
         required: true  
-
     },
     Temp: {
         type: Number,
         required: true
     },
-    
     unixtime: {
         type: Number,
         required: true
@@ -27,7 +23,7 @@ var WeatherSchema = mongoose.Schema({
     }
 });
 
-var Weather = mongoose.model('weather', WeatherSchema);
+var Weather = mongoose.model('weather', WeatherSchema); 
 
 module.exports = {
 

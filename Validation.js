@@ -1,5 +1,3 @@
-
-
 module.exports = {
     fieldsNotEmpty: function (object) {
         var errors = [];
@@ -8,7 +6,7 @@ module.exports = {
                 errors.push(arguments[i]);
             }
         };
-        return errors.length === 0 ? null : errors;
+        return errors.length === 0 ? null : errors;    //if lengte van errors = 0, return null, anders de errors returnen.
         },
     fieldNotEmpty: function (object, field) {
         return object && object[field] && object[field] !== "";
