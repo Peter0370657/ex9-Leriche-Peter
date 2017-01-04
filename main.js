@@ -135,6 +135,33 @@ app.post("/drone", function (request, response) {
     });
 });
 
+app.put("/drone/:id", function (request, response) {
+    var Drone = new Dronep(
+            request.body.Location,
+            request.body.id,
+            request.body.date,
+            request.body.mac
+        );
+    var errors = validate.fieldsNotEmpty(Drone,
+            "Location",
+            "id",
+            "date",
+            "mac"
+            );
+    if (errors) {
+        response.status(400).send({msg: "Volgende velden ontbreken of zijn verkeerd ingevuld:" + errors.concat()});
+        return;
+    }
+    dalDrone.updateDrone(Drone, function (err, drone) {
+        if (err) {
+            console.log(err);
+        }
+        response.send(drone);
+
+        console.log("Drone Updated");
+    });
+});
+
 //LOCATION
 
 app.get("/location", function (request, response) {
@@ -202,7 +229,7 @@ app.put("/location/:locatieid", function (request, response) {
         }
         response.send(locatie);
     });
+    console.log("Weather updated");
 });
-
 
 app.listen(8765);
