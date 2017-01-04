@@ -39,8 +39,15 @@ app.post("/weather", function (request, response) {
     var Weather = new Weatherp(request.body.Weatherid, request.body.Weatherdesc, request.body.Temp, request.body.unixtime, request.body.Location);
 
     dalWeather.createWeather(Weather, function (err, weather) {
-        if (err) {
-            console.log(err);
+         var errors = validate.fieldsNotEmpty("Weatherid",
+            "Weatherdesc",
+            "Temp",
+            "unixtime",
+            "Location"
+            );
+        if (errors) {
+            response.status(400).send({msg: "Volgende velden ontbreken of zijn verkeerd ingevuld:" + errors.concat()});
+            return;
         }
         response.send(weather);
 
@@ -76,7 +83,7 @@ app.post("/drone", function (request, response) {
             "mac"
             );
         if (errors) {
-            response.status(400).send({msg: "Volgende velden zijn verplicht:" + errors.concat()});
+            response.status(400).send({msg: "Volgende velden ontbreken of zijn verkeerd ingevuld:" + errors.concat()});
             return;
         }
         response.send(drone);
@@ -108,8 +115,15 @@ app.post("/location", function (request, response) {
     var Location = new Locationp(request.body.locatieid, request.body.naam, request.body.stad, request.body.capaciteit, request.body.Lokaal);
 
     dalLocation.createLocation(Location, function (err, location) {
-        if (err) {
-            console.log(err);
+       var errors = validate.fieldsNotEmpty("locatieid",
+            "naam",
+            "stad",
+            "capaciteit",
+            "Lokaal"
+            );
+        if (errors) {
+            response.status(400).send({msg: "Volgende velden ontbreken of zijn verkeerd ingevuld:" + errors.concat()});
+            return;
         }
         response.send(location);
 
