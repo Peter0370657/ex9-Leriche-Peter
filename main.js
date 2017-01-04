@@ -37,12 +37,12 @@ var Weatherp = function (Weatherid, Weatherdesc, Temp, unixtime, Location) {
 };
 app.post("/weather", function (request, response) {
     var Weather = new Weatherp(
-        request.body.Weatherid,
-        request.body.Weatherdesc,
-        request.body.Temp,
-        request.body.unixtime,
-        request.body.Location
-    );
+            request.body.Weatherid,
+            request.body.Weatherdesc,
+            request.body.Temp,
+            request.body.unixtime,
+            request.body.Location
+            );
 
     dalWeather.createWeather(Weather, function (err, weather) {
         var errors = validate.fieldsNotEmpty(Weather,
@@ -64,18 +64,18 @@ app.post("/weather", function (request, response) {
 
 app.put("/weather/:Weatherid", function (request, response) {
     var Weather = new Weatherp(
-        request.body.Weatherid,
-        request.body.Weatherdesc,
-        request.body.Temp,
-        request.body.unixtime,
-        request.body.Location
-    );
+            request.body.Weatherid,
+            request.body.Weatherdesc,
+            request.body.Temp,
+            request.body.unixtime,
+            request.body.Location
+            );
     var errors = validate.fieldsNotEmpty(Weather,
-        "Weatherid",
-        "Weatherdesc",
-        "Temp",
-        "unixtime",
-        "Location");
+            "Weatherid",
+            "Weatherdesc",
+            "Temp",
+            "unixtime",
+            "Location");
     if (errors) {
         response.status(400).send({msg: "Volgende velden ontbreken of zijn verkeerd ingevuld:" + errors.concat()});
         return;
@@ -116,7 +116,7 @@ app.post("/drone", function (request, response) {
             request.body.ID,
             request.body.date,
             request.body.mac
-        );
+            );
     var errors = validate.fieldsNotEmpty(Drone,
             "Droneid",
             "Location",
@@ -145,7 +145,7 @@ app.put("/drone/:Droneid", function (request, response) {
             request.body.ID,
             request.body.date,
             request.body.mac
-        );
+            );
     var errors = validate.fieldsNotEmpty(Drone,
             "Droneid",
             "Location",
@@ -187,11 +187,11 @@ var Locationp = function (locatieid, naam, stad, capaciteit, Lokaal) {
 
 app.post("/location", function (request, response) {
     var Location = new Locationp(
-        request.body.locatieid,
-        request.body.naam,
-        request.body.stad,
-        request.body.capaciteit,
-        request.body.Lokaal);
+            request.body.locatieid,
+            request.body.naam,
+            request.body.stad,
+            request.body.capaciteit,
+            request.body.Lokaal);
     var errors = validate.fieldsNotEmpty(Location,
             "locatieid",
             "naam",
@@ -217,16 +217,16 @@ app.post("/location", function (request, response) {
 app.put("/location/:locatieid", function (request, response) {
     var Locatie = new Locationp(request.body.locatieid, request.body.naam, request.body.stad, request.body.capaciteit, request.body.Lokaal);
     var errors = validate.fieldsNotEmpty(Locatie,
-     "locatieid",
-     "naam",
-     "stad",
-     "capaciteit",
-     "Lokaal"
-     );
-     if (errors) {
-     response.status(400).send({msg: "Volgende velden ontbreken of zijn verkeerd ingevuld:" + errors.concat()});
-     return;
-     } 
+            "locatieid",
+            "naam",
+            "stad",
+            "capaciteit",
+            "Lokaal"
+            );
+    if (errors) {
+        response.status(400).send({msg: "Volgende velden ontbreken of zijn verkeerd ingevuld:" + errors.concat()});
+        return;
+    }
     dalLocation.updateLocation(request.params.locatieid, Locatie, function (err, locatie) {
         if (err) {
             console.log(err);
