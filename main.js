@@ -101,7 +101,8 @@ app.get("/drone", function (request, response) {
     });
 });
 
-var Dronep = function (Location, id, date, mac) {
+var Dronep = function (Droneid, Location, id, date, mac) {
+    this.Droneid = Droneid;
     this.Location = Location;
     this.id = id;
     this.date = date;
@@ -110,12 +111,14 @@ var Dronep = function (Location, id, date, mac) {
 
 app.post("/drone", function (request, response) {
     var Drone = new Dronep(
+            request.body.Droneid,
             request.body.Location,
             request.body.id,
             request.body.date,
             request.body.mac
         );
     var errors = validate.fieldsNotEmpty(Drone,
+            "Droneid",
             "Location",
             "id",
             "date",
@@ -135,14 +138,16 @@ app.post("/drone", function (request, response) {
     });
 });
 
-app.put("/drone/:id", function (request, response) {
+app.put("/drone/:Droneid", function (request, response) {
     var Drone = new Dronep(
+            request.body.Droneid,
             request.body.Location,
             request.body.id,
             request.body.date,
             request.body.mac
         );
     var errors = validate.fieldsNotEmpty(Drone,
+            "Droneid",
             "Location",
             "id",
             "date",
