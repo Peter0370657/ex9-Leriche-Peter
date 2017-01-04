@@ -157,7 +157,7 @@ app.put("/drone/:Droneid", function (request, response) {
         response.status(400).send({msg: "Volgende velden ontbreken of zijn verkeerd ingevuld:" + errors.concat()});
         return;
     }
-    dalDrone.updateDrone(request.params.Droneid, function (err, drone) {
+    dalDrone.updateDrone(request.params.Droneid, Drone , function (err, drone) {
         if (err) {
             console.log(err);
         }
