@@ -162,7 +162,6 @@ app.put("/drone/:Droneid", function (request, response) {
             console.log(err);
         }
         response.send(drone);
-
         console.log("Drone Updated");
     });
 });
