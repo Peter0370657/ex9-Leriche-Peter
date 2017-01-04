@@ -39,7 +39,8 @@ app.post("/weather", function (request, response) {
     var Weather = new Weatherp(request.body.Weatherid, request.body.Weatherdesc, request.body.Temp, request.body.unixtime, request.body.Location);
 
     dalWeather.createWeather(Weather, function (err, weather) {
-         var errors = validate.fieldsNotEmpty("Weatherid",
+         var errors = validate.fieldsNotEmpty(
+            "Weatherid",
             "Weatherdesc",
             "Temp",
             "unixtime",
@@ -53,6 +54,23 @@ app.post("/weather", function (request, response) {
 
         console.log("Weather added");
     });
+});
+
+app.put("/weather/:Weatherid", function(request, response){
+    var Weather = new Weatherp(request.body.Weatherid, request.body.Weatherdesc, request.body.Temp, request.body.unixtime, request.body.Location);
+    var errors = validate.fieldsNotEmpty( "Weatherid", "Weatherdesc", "Temp", "unixtime", "Location");
+    if (errors) {
+        response.status(400).send({msg: "Volgende velden ontbreken of zijn verkeerd ingevuld:" + errors.concat()});
+        return;
+    }
+    dalWeather.updateWeather(request.params.Weatherid, Weather, function (err, weather){
+       if (err){
+           console.log(err);
+       } 
+       response.send(weather);
+       console.log(request.body.Weatherid+" updated");
+    });
+    
 });
 
 //DRONE
@@ -77,7 +95,8 @@ app.post("/drone", function (request, response) {
     var Drone = new Dronep(request.body.Location, request.body.id, request.body.date, request.body.mac);
 
     dalDrone.createDrone(Drone, function (err, drone) {
-        var errors = validate.fieldsNotEmpty("Location",
+        var errors = validate.fieldsNotEmpty(
+            "Location",
             "id",
             "date",
             "mac"
@@ -115,7 +134,8 @@ app.post("/location", function (request, response) {
     var Location = new Locationp(request.body.locatieid, request.body.naam, request.body.stad, request.body.capaciteit, request.body.Lokaal);
 
     dalLocation.createLocation(Location, function (err, location) {
-       var errors = validate.fieldsNotEmpty("locatieid",
+       var errors = validate.fieldsNotEmpty(
+            "locatieid",
             "naam",
             "stad",
             "capaciteit",
