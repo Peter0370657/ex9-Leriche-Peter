@@ -1,11 +1,17 @@
+/* global id */
+
 var mongoose = require("mongoose");       //Mongoose op aanraden van Wibren/jonas omdat het makkelijker is om mee te werken
 
 var DroneSchema = mongoose.Schema({
+    Droneid: {
+        type: String,
+        required: true
+    },
     Location: {
         type: String,
         required: true
     },
-    id: {
+    ID: {
         type: String,
         required: true,
         unique: true
@@ -27,13 +33,13 @@ module.exports = {
     listAllDrones: function (callback){
          Drone.find(callback);
     },
-    findDrone: function(id, callback){
-        Drone.find({id: id}, callback);
+    findDrone: function(Droneid, callback){
+        Drone.find({Droneid: Droneid}, callback);
     },
     createDrone: function(drone, callback){                             //Create = POST
         Drone.create(drone, callback);
     },
     updateDrone: function(id, newdrone, callback ){                     //update =PUT
-        Drone.findOneAndUpdate({id: id}, newdrone, callback);
+        Drone.findOneAndUpdate({Droneid: id}, newdrone, callback);
     }
 };
