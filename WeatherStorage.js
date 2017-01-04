@@ -13,7 +13,7 @@ var WeatherSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    unixtime: {
+    unixtime: {                 //kan makkelijk met een functie omgezet worden naar date/ time.  komt in de externe APi zo aan bod.
         type: Number,
         required: true
     },
