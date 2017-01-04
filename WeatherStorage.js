@@ -1,3 +1,5 @@
+/* global Weatherid */
+
 var mongoose = require("mongoose");
 
 var WeatherSchema = mongoose.Schema({
@@ -33,12 +35,12 @@ module.exports = {
         Weather.find(callback);
     },
     findWeather: function (weatherid, callback) {
-        Weather.find({Weatherid: id}, callback);
+        Weather.find({Weatherid: Weatherid}, callback);
     },
-    createWeather: function (weather, callback) {
+    createWeather: function (weather, callback) {                               //create -> POST
         Weather.create(weather, callback);
     },
-    updateWeather: function (id, newwe, callback) {
+    updateWeather: function (id, newwe, callback) {                             //update = PUT
         Weather.findOneAndUpdate({Weatherid: id}, newwe, callback);
     }
 };

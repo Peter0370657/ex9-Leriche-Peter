@@ -34,10 +34,10 @@ module.exports = {
     findLocation: function (stad, callback) {
         Locatie.find({stad: stad}, callback);
     },
-    createLocation: function (locatie, callback) {
+    createLocation: function (locatie, callback) {                  //Create = POST
         Locatie.create(locatie, callback);
     },
-    updateLocation: function (id, newloc, callback) {
-        Locatie.findOneAndUpdate({locatieid: id}, newloc, callback);// newloc is de json met de nieuwe gegevens in
+    updateLocation: function (id, newloc, callback) {               //update = PUT
+        Locatie.findOneAndUpdate({locatieid: id}, newloc, callback); 
     }
 };

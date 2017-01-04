@@ -30,10 +30,10 @@ module.exports = {
     findDrone: function(id, callback){
         Drone.find({id: id}, callback);
     },
-    createDrone: function(drone, callback){
+    createDrone: function(drone, callback){                             //Create = POST
         Drone.create(drone, callback);
     },
-    updateDrone: function(id, newdrone, callback ){
+    updateDrone: function(id, newdrone, callback ){                     //update =PUT
         Drone.findOneAndUpdate({id: id}, newdrone, callback);
     }
 };
