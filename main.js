@@ -164,7 +164,7 @@ app.put("/location/:locatieid", function (request, response) {
         if (errors) {
             response.status(400).send({msg: "Volgende velden ontbreken of zijn verkeerd ingevuld:" + errors.concat()});
             return;
-        }*/
+        }*/ 
     dalLocation.updateLocation(request.params.locatieid, Locatie, function (err, locatie) {
         if (err) {
             console.log(err);
