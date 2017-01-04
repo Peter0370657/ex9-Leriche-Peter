@@ -36,16 +36,22 @@ var Weatherp = function (Weatherid, Weatherdesc, Temp, unixtime, Location) {
     this.Location = Location;
 };
 app.post("/weather", function (request, response) {
-    var Weather = new Weatherp(request.body.Weatherid, request.body.Weatherdesc, request.body.Temp, request.body.unixtime, request.body.Location);
+    var Weather = new Weatherp(
+        request.body.Weatherid,
+        request.body.Weatherdesc,
+        request.body.Temp,
+        request.body.unixtime,
+        request.body.Location
+    );
 
     dalWeather.createWeather(Weather, function (err, weather) {
-         var errors = validate.fieldsNotEmpty(
-            "Weatherid",
-            "Weatherdesc",
-            "Temp",
-            "unixtime",
-            "Location"
-            );
+        var errors = validate.fieldsNotEmpty(Weather,
+                "Weatherid",
+                "Weatherdesc",
+                "Temp",
+                "unixtime",
+                "Location"
+                );
         if (errors) {
             response.status(400).send({msg: "Volgende velden ontbreken of zijn verkeerd ingevuld:" + errors.concat()});
             return;
@@ -56,21 +62,32 @@ app.post("/weather", function (request, response) {
     });
 });
 
-app.put("/weather/:Weatherid", function(request, response){
-    var Weather = new Weatherp(request.body.Weatherid, request.body.Weatherdesc, request.body.Temp, request.body.unixtime, request.body.Location);
-    var errors = validate.fieldsNotEmpty( "Weatherid", "Weatherdesc", "Temp", "unixtime", "Location");
+app.put("/weather/:Weatherid", function (request, response) {
+    var Weather = new Weatherp(
+        request.body.Weatherid,
+        request.body.Weatherdesc,
+        request.body.Temp,
+        request.body.unixtime,
+        request.body.Location
+    );
+    var errors = validate.fieldsNotEmpty(Weather,
+        "Weatherid",
+        "Weatherdesc",
+        "Temp",
+        "unixtime",
+        "Location");
     if (errors) {
         response.status(400).send({msg: "Volgende velden ontbreken of zijn verkeerd ingevuld:" + errors.concat()});
         return;
     }
-    dalWeather.updateWeather(request.params.Weatherid, Weather, function (err, weather){
-       if (err){
-           console.log(err);
-       } 
-       response.send(weather);
-       console.log(request.body.Weatherid+" updated");
+    dalWeather.updateWeather(request.params.Weatherid, Weather, function (err, weather) {
+        if (err) {
+            console.log(err);
+        }
+        response.send(weather);
+        console.log(request.body.Weatherid + " updated");
     });
-    
+
 });
 
 //DRONE
@@ -92,24 +109,31 @@ var Dronep = function (Location, id, date, mac) {
 };
 
 app.post("/drone", function (request, response) {
-    var Drone = new Dronep(request.body.Location, request.body.id, request.body.date, request.body.mac);
-
-    dalDrone.createDrone(Drone, function (err, drone) {
-        var errors = validate.fieldsNotEmpty(
+    var Drone = new Dronep(
+            request.body.Location,
+            request.body.id,
+            request.body.date,
+            request.body.mac
+        );
+    var errors = validate.fieldsNotEmpty(Drone,
             "Location",
             "id",
             "date",
             "mac"
             );
-        if (errors) {
-            response.status(400).send({msg: "Volgende velden ontbreken of zijn verkeerd ingevuld:" + errors.concat()});
-            return;
+    if (errors) {
+        response.status(400).send({msg: "Volgende velden ontbreken of zijn verkeerd ingevuld:" + errors.concat()});
+        return;
+    }
+    dalDrone.createDrone(Drone, function (err, drone) {
+        if (err) {
+            console.log(err);
         }
         response.send(drone);
 
         console.log("Drone added");
     });
-}); 
+});
 
 //LOCATION
 
@@ -131,40 +155,47 @@ var Locationp = function (locatieid, naam, stad, capaciteit, Lokaal) {
 };
 
 app.post("/location", function (request, response) {
-    var Location = new Locationp(request.body.locatieid, request.body.naam, request.body.stad, request.body.capaciteit, request.body.Lokaal);
-
-    dalLocation.createLocation(Location, function (err, location) {
-       var errors = validate.fieldsNotEmpty(
+    var Location = new Locationp(
+        request.body.locatieid,
+        request.body.naam,
+        request.body.stad,
+        request.body.capaciteit,
+        request.body.Lokaal);
+    var errors = validate.fieldsNotEmpty(Location,
             "locatieid",
             "naam",
             "stad",
             "capaciteit",
             "Lokaal"
             );
-        if (errors) {
-            response.status(400).send({msg: "Volgende velden ontbreken of zijn verkeerd ingevuld:" + errors.concat()});
-            return;
+    if (errors) {
+        response.status(400).send({msg: "Volgende velden ontbreken of zijn verkeerd ingevuld:" + errors.concat()});
+        return;
+    }
+    dalLocation.createLocation(Location, function (err, location) {
+        if (err) {
+            console.log(err);
         }
         response.send(location);
 
         console.log("Location added");
     });
-}); 
+});
 
 
 app.put("/location/:locatieid", function (request, response) {
     var Locatie = new Locationp(request.body.locatieid, request.body.naam, request.body.stad, request.body.capaciteit, request.body.Lokaal);
     /*var errors = validate.fieldsNotEmpty(
-        "locatieid",
-        "naam",
-        "stad",
-        "capaciteit",
-        "Lokaal"
-        );
-        if (errors) {
-            response.status(400).send({msg: "Volgende velden ontbreken of zijn verkeerd ingevuld:" + errors.concat()});
-            return;
-        } */
+     "locatieid",
+     "naam",
+     "stad",
+     "capaciteit",
+     "Lokaal"
+     );
+     if (errors) {
+     response.status(400).send({msg: "Volgende velden ontbreken of zijn verkeerd ingevuld:" + errors.concat()});
+     return;
+     } */
     dalLocation.updateLocation(request.params.locatieid, Locatie, function (err, locatie) {
         if (err) {
             console.log(err);
